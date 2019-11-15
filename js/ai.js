@@ -35,7 +35,7 @@ AI.prototype.search = function(depth, alpha, beta, positions, cutoffs) {
       if (newGrid.move(direction).moved) {
         positions++;
         if (newGrid.isWin()) {
-          return { move: direction, score: 10000, positions: positions, cutoffs: cutoffs };
+          return { move: direction, score: 100000000, positions: positions, cutoffs: cutoffs };
         }
         var newAI = new AI(newGrid);
 
@@ -43,7 +43,7 @@ AI.prototype.search = function(depth, alpha, beta, positions, cutoffs) {
           result = { move: direction, score: newAI.eval() };
         } else {
           result = newAI.search(depth-1, bestScore, beta, positions, cutoffs);
-          if (result.score > 9900) { // win
+          if (result.score > 990000) { // win
             result.score--; // to slightly penalize higher depth from win
           }
           positions = result.positions;
@@ -129,7 +129,7 @@ AI.prototype.iterativeDeep = function() {
   var depth = 0;
   var best;
   do {
-    var newBest = this.search(depth, -10000, 10000, 0 ,0);
+    var newBest = this.search(depth, -1000000, 1000000, 0 ,0);
     if (newBest.move == -1) {
       break;
     } else {
